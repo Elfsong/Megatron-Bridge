@@ -33,7 +33,7 @@ echo "Total GPUs: $((SLURM_JOB_NUM_NODES * 8))"
 echo "Node list: $SLURM_JOB_NODELIST"
 echo "================================================================"
 
-WANDB="<WANDB_KEY>" # TODO: replace with your own WandB API key
+export WANDB_API_KEY="<WANDB_KEY>" # TODO: replace with your own WandB API key
 
 # ============================================================================
 # System Limits Configuration
@@ -122,7 +122,7 @@ export PYTHONUNBUFFERED=1
 # ============================================================================
 # Create log directory
 # ============================================================================
-mkdir -p logs
+mkdir -p logs_397
 
 # ============================================================================
 # Launch training across all nodes
