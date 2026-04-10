@@ -78,7 +78,7 @@ ddp:
   check_for_large_grads: false
   check_for_nan_in_grad: true
   data_parallel_sharding_strategy: optim_grads_params
-  delay_wgrad_compute: true
+  delay_wgrad_compute: false
   disable_symmetric_registration: false
   fp8_param_gather: false
   fsdp_all_gather_in_start_param_sync: true
@@ -182,41 +182,7 @@ logger:
   wandb_exp_name: null
   wandb_project: null
   wandb_save_dir: null
-mixed_precision:
-  _target_: megatron.bridge.training.mixed_precision.MixedPrecisionConfig
-  autocast_dtype: null
-  autocast_enabled: false
-  bf16: true
-  first_last_layers_bf16: false
-  fp16: false
-  fp32: false
-  fp4: null
-  fp4_recipe: nvfp4
-  fp8: hybrid
-  fp8_amax_compute_algo: most_recent
-  fp8_amax_history_len: 1
-  fp8_dot_product_attention: false
-  fp8_margin: 0
-  fp8_multi_head_attention: false
-  fp8_param: false
-  fp8_param_gather: false
-  fp8_recipe: tensorwise
-  fp8_wgrad: true
-  grad_reduce_in_fp32: false
-  hysteresis: 2
-  initial_loss_scale: 4294967296
-  loss_scale: null
-  loss_scale_window: 1000
-  min_loss_scale: 1.0
-  num_layers_at_end_in_bf16: 0
-  num_layers_at_start_in_bf16: 0
-  params_dtype:
-    _call_: false
-    _target_: torch.bfloat16
-  pipeline_dtype:
-    _call_: false
-    _target_: torch.bfloat16
-  reuse_grad_buf_for_mxfp8_param_ag: false
+mixed_precision: bf16_mixed
 model:
   _target_: megatron.bridge.models.qwen_vl.qwen35_vl_provider.Qwen35VLMoEModelProvider
   account_for_embedding_in_pipeline_split: false
