@@ -44,7 +44,7 @@ if __name__ == "__main__":
     ###### CONFIG TO TRY ######
     cfg.model.tensor_model_parallel_size = 2
     cfg.model.pipeline_model_parallel_size = 4
-    cfg.model.expert_model_parallel_size = 32
+    cfg.model.expert_model_parallel_size = 16
     cfg.model.recompute_granularity = "selective"
     cfg.model.recompute_method = None
     cfg.model.recompute_modules = ["moe_act", "layernorm"]
@@ -57,6 +57,7 @@ if __name__ == "__main__":
     cfg.train.manual_gc_interval = 10
     cfg.train.micro_batch_size = 1
     cfg.model.fp8 = "hybrid"
+    # cfg.model.virtual_pipeline_model_parallel_size = 3  # OOM with EP=16
     ###### END OF CONFIG TO TRY ######
 
 

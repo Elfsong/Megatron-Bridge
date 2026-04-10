@@ -248,7 +248,7 @@ model:
   eos_token_id: 248044
   ep_overlap_early_attn_memory_release: false
   experimental_attention_variant: gated_delta_net
-  expert_model_parallel_size: 32
+  expert_model_parallel_size: 16
   expert_tensor_parallel_size: 1
   external_cuda_graph: false
   ffn_hidden_size: null
