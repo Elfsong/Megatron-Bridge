@@ -263,7 +263,7 @@ model:
   fp4_param: false
   fp4_quantizer_factory: null
   fp4_recipe: nvfp4
-  fp8: null
+  fp8: hybrid
   fp8_amax_compute_algo: most_recent
   fp8_amax_history_len: 1
   fp8_dot_product_attention: false

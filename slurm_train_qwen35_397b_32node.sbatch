@@ -4,6 +4,7 @@
 #SBATCH --ntasks-per-node=1
 #SBATCH --gres=gpu:8
 #SBATCH --exclusive
+#SBATCH --exclude=worker-56
 #SBATCH --output=logs/qwen35_397b_%j.out
 #SBATCH --error=logs/qwen35_397b_%j.err
 

@@ -56,6 +56,7 @@ if __name__ == "__main__":
     cfg.model.tp_comm_overlap = True
     cfg.train.manual_gc_interval = 10
     cfg.train.micro_batch_size = 1
+    cfg.model.fp8 = "hybrid"
     ###### END OF CONFIG TO TRY ######
 
 
