@@ -1,9 +1,9 @@
 #!/bin/bash
 # ============================================================================
-# Container Training Execution Script - Qwen3.5-397B-A17B (16 nodes / 128 GPUs)
+# Container Training Execution Script - Qwen3.5-397B-A17B (32 nodes / 256 GPUs)
 # ============================================================================
 # This script runs inside the container on each node.
-# Called by srun from slurm_train_qwen35_397b_16node.sbatch
+# Called by srun from slurm_train_qwen35_397b_32node.sbatch
 # ============================================================================
 
 set -e

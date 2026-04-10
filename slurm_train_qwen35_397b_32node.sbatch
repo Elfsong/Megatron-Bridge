@@ -10,19 +10,19 @@
 
 
 # ============================================================================
-# SLURM Multi-Node Training Script - Qwen3.5-397B-A17B (16 nodes, 128 GPUs)
+# SLURM Multi-Node Training Script - Qwen3.5-397B-A17B (32 nodes, 256 GPUs)
 # ============================================================================
-# Usage: sbatch mm_slurm/slurm_train_qwen35_397b_16node.sbatch
+# Usage: sbatch slurm_train_qwen35_397b_32node.sbatch
 #
-# Requirements: 16 nodes, 128 GPUs total (8 per node)
-# Model parallelism: TP=2, PP=4, EP=16, DP=16
-#   World = TP(2) × PP(4) × DP(16) = 128 GPUs
-#   EP=16 fully shards MoE experts across all 16 GPUs in each DP group
+# Requirements: 32 nodes, 256 GPUs total (8 per node)
+# Model parallelism: TP=2, PP=4, EP=32, DP=32
+#   World = TP(2) × PP(4) × DP(32) = 256 GPUs
+#   EP=32 fully shards MoE experts across all 32 GPUs in each DP group
 # ============================================================================
 
 # Print job information
 echo "================================================================"
-echo "Qwen3.5-397B-A17B Pretraining — 16 Nodes / 128 GPUs"
+echo "Qwen3.5-397B-A17B Pretraining — 32 Nodes / 256 GPUs"
 echo "================================================================"
 echo "Job ID: $SLURM_JOB_ID"
 echo "Job Name: $SLURM_JOB_NAME"
@@ -94,13 +94,13 @@ export NCCL_SOCKET_NTHREADS=8
 # ============================================================================
 export MASTER_ADDR=$(scontrol show hostnames $SLURM_JOB_NODELIST | head -n 1)
 export MASTER_PORT=29500
-export WORLD_SIZE=$((SLURM_JOB_NUM_NODES * 8))  # 16 nodes × 8 GPUs = 128
+export WORLD_SIZE=$((SLURM_JOB_NUM_NODES * 8))  # 32 nodes × 8 GPUs = 256
 export GPUS_PER_NODE=8
 
 echo "Master: $MASTER_ADDR:$MASTER_PORT"
 echo "World size: $WORLD_SIZE"
 echo "Network: $([ "$USE_INFINIBAND" -eq 1 ] && echo "InfiniBand" || echo "Ethernet")"
-echo "Model: Qwen3.5-397B-A17B (TP=2, PP=4, EP=16, DP=16 on 128 GPUs)"
+echo "Model: Qwen3.5-397B-A17B (TP=2, PP=4, EP=32, DP=32 on 256 GPUs)"
 echo "================================================================"
 
 # ============================================================================
@@ -127,7 +127,7 @@ mkdir -p logs_397
 # ============================================================================
 # Launch training across all nodes
 # ============================================================================
-echo "Launching Qwen3.5-397B-A17B training on 16 nodes..."
+echo "Launching Qwen3.5-397B-A17B training on 32 nodes..."
 echo "================================================================"
 
 srun --container-image="${CONTAINER_IMAGE}" \
