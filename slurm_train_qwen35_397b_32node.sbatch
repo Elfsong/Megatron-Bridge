@@ -3,10 +3,9 @@
 #SBATCH --nodes=32
 #SBATCH --ntasks-per-node=1
 #SBATCH --gres=gpu:8
-#SBATCH --cpus-per-task=164
-#SBATCH --mem=1900G
-#SBATCH --output=logs_397/slurm-%j.out
-#SBATCH --error=logs_397/slurm-%j.err
+#SBATCH --exclusive
+#SBATCH --output=logs/qwen35_397b_%j.out
+#SBATCH --error=logs/qwen35_397b_%j.err
 
 
 # ============================================================================
@@ -107,7 +106,7 @@ echo "================================================================"
 # Container Configuration
 # ============================================================================
 CONTAINER_IMAGE="/mnt/shared/images/megatron-bridge-transformers-5.3.0.dev0.sqsh"
-CONTAINER_NAME="qwen35_397b_train_32n_100"
+CONTAINER_NAME="qwen35_397b_train_32n_${SLURM_JOB_ID}"
 MEGATRON_BRIDGE_PATH="${MEGATRON_BRIDGE_PATH:-$(pwd)}"
 CONTAINER_MOUNT_PATH="/megatron-bridge"
 
@@ -122,7 +121,7 @@ export PYTHONUNBUFFERED=1
 # ============================================================================
 # Create log directory
 # ============================================================================
-mkdir -p logs_397
+mkdir -p logs
 
 # ============================================================================
 # Launch training across all nodes

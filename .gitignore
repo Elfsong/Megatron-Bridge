@@ -188,3 +188,4 @@ slurm*.out
 
 # Model
 Qwen/
+cache_hf_dataset/
