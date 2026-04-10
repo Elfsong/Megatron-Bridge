@@ -42,10 +42,15 @@ from transformers.utils import (
     add_start_docstrings,
     add_start_docstrings_to_model_forward,
     is_flash_attn_2_available,
-    is_flash_attn_greater_or_equal_2_10,
     logging,
     replace_return_docstrings,
 )
+
+try:
+    from transformers.utils import is_flash_attn_greater_or_equal_2_10
+except ImportError:
+    from transformers.utils import is_flash_attn_greater_or_equal
+    is_flash_attn_greater_or_equal_2_10 = lambda: is_flash_attn_greater_or_equal("2.10")
 
 
 try:
