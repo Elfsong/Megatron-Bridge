@@ -33,7 +33,7 @@ echo "Total GPUs: $((SLURM_JOB_NUM_NODES * 8))"
 echo "Node list: $SLURM_JOB_NODELIST"
 echo "================================================================"
 
-export WANDB_API_KEY="<WANDB_KEY>" # TODO: replace with your own WandB API key
+export WANDB_MODE=offline
 
 # ============================================================================
 # System Limits Configuration
