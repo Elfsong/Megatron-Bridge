@@ -51,12 +51,18 @@ if __name__ == "__main__":
     cfg.model.recompute_num_layers = None
     cfg.optimizer.use_precision_aware_optimizer = True
     cfg.ddp.grad_reduce_in_fp32 = False
+    if cfg.mixed_precision is not None:
+        cfg.mixed_precision.grad_reduce_in_fp32 = False
     cfg.model.moe_shared_expert_overlap = True
     cfg.model.moe_router_fusion = True
     cfg.model.tp_comm_overlap = True
     cfg.train.manual_gc_interval = 10
     cfg.train.micro_batch_size = 1
-    cfg.model.fp8 = "hybrid"
+    cfg.model.fp8 = "e4m3"
+    cfg.model.fp8_recipe = "blockwise"
+    cfg.ddp.fp8_param_gather = True
+    cfg.model.moe_router_padding_for_fp8 = True
+    cfg.ddp.delay_wgrad_compute = True
     # cfg.model.virtual_pipeline_model_parallel_size = 3  # OOM with EP=16
     ###### END OF CONFIG TO TRY ######
 

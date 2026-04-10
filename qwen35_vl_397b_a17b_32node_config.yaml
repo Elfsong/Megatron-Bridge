@@ -41,7 +41,7 @@ checkpoint:
   replication_jump: null
   save: /megatron-bridge/nemo_experiments/qwen35_vl_397b_32node/checkpoints
   save_dgrads_interval: null
-  save_interval: 1000
+  save_interval: 500
   save_optim: true
   save_retain_interval: null
   save_rng: true
@@ -78,7 +78,7 @@ ddp:
   check_for_large_grads: false
   check_for_nan_in_grad: true
   data_parallel_sharding_strategy: optim_grads_params
-  delay_wgrad_compute: false
+  delay_wgrad_compute: true
   disable_symmetric_registration: false
   fp8_param_gather: false
   fsdp_all_gather_in_start_param_sync: true
