@@ -44,9 +44,14 @@ from datasets import load_dataset
 for split in ['train', 'validation', 'test']:
     try:
         load_dataset('naver-clova-ix/cord-v2', split=split)
-        print(f'  Downloaded split: {split}')
+        print(f'  Downloaded cord-v2 split: {split}')
     except Exception as e:
-        print(f'  Skipped split {split}: {e}')
+        print(f'  Skipped cord-v2 split {split}: {e}')
+try:
+    load_dataset('HuggingFaceM4/the_cauldron', 'raven', split='train')
+    print('  Downloaded raven dataset')
+except Exception as e:
+    print(f'  Skipped raven: {e}')
 "
     touch "${DOWNLOAD_MARKER}"
     echo "Node 0: Dataset download complete."

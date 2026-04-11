@@ -62,10 +62,10 @@ dataset:
   drop_last: true
   hf_processor_path: ./Qwen/Qwen3.5-397B-A17B
   maker_kwargs: null
-  maker_name: make_cord_v2_dataset
-  num_workers: 2
+  maker_name: make_raven_dataset
+  num_workers: 8
   pack_sequences_in_batch: false
-  persistent_workers: false
+  persistent_workers: true
   pin_memory: true
   seq_length: 4096
   skip_getting_attention_mask_from_dataset: true
@@ -740,7 +740,7 @@ train:
   iterations_to_skip: []
   manual_gc: true
   manual_gc_eval: 100
-  manual_gc_interval: 10
+  manual_gc_interval: 50
   micro_batch_size: 1
   rampup_batch_size: null
   skip_sync_grad_norm_across_mp: false
@@ -751,7 +751,7 @@ train:
 validation:
   _target_: megatron.training.config.training_config.ValidationConfig
   eval_interval: 10000
-  eval_iters: 10
+  eval_iters: 0
   full_validation: false
   multiple_validation_sets: false
   skip_train: false

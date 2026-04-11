@@ -23,7 +23,7 @@ if __name__ == "__main__":
     cfg.ddp.overlap_param_gather = True
 
 
-    # cfg.dataset.maker_name = "make_image_caption_pretrain_dataset"
+    cfg.dataset.maker_name = "make_raven_dataset"
 
     # cfg.model.context_model_parallel_size = 1 
     # cfg.model.use_cpu_initialization = True  # Required to avoid OOM during large model loading
@@ -31,8 +31,10 @@ if __name__ == "__main__":
     cfg.train.train_iters = 3000
     cfg.train.global_batch_size = 2048
     cfg.validation.eval_interval = 10000
-    cfg.validation.eval_iters = 10
+    cfg.validation.eval_iters = 0  # raven dataset only has train split
     cfg.dataset.pack_sequences_in_batch = False
+    cfg.dataset.num_workers = 8
+    cfg.dataset.persistent_workers = True
 
     run_output_dir = os.path.join(os.getcwd(), "nemo_experiments", "qwen35_vl_397b_32node")
     cfg.checkpoint.save = os.path.join(run_output_dir, "checkpoints")
@@ -57,7 +59,7 @@ if __name__ == "__main__":
     cfg.model.moe_shared_expert_overlap = True
     cfg.model.moe_router_fusion = True
     cfg.model.tp_comm_overlap = True
-    cfg.train.manual_gc_interval = 10
+    cfg.train.manual_gc_interval = 50
     cfg.train.micro_batch_size = 1
     cfg.model.fp8 = "hybrid"
     # cfg.model.virtual_pipeline_model_parallel_size = 3  # OOM with EP=16
