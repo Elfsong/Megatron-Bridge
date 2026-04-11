@@ -2,6 +2,7 @@ import os
 
 from megatron.bridge.models.qwen_vl.qwen3_vl_step import forward_step
 from megatron.bridge.recipes.qwen_vl import qwen35_vl_397b_a17b_sft_config
+from megatron.bridge.training.mixed_precision import get_mixed_precision_config
 from megatron.bridge.training.pretrain import pretrain
 from megatron.bridge.utils.common_utils import get_rank_safe
 
@@ -51,6 +52,7 @@ if __name__ == "__main__":
     cfg.model.recompute_num_layers = None
     cfg.optimizer.use_precision_aware_optimizer = True
     cfg.ddp.grad_reduce_in_fp32 = False
+    cfg.mixed_precision = get_mixed_precision_config(cfg.mixed_precision)
     cfg.mixed_precision.grad_reduce_in_fp32 = False
     cfg.model.moe_shared_expert_overlap = True
     cfg.model.moe_router_fusion = True
