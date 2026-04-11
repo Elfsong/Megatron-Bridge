@@ -36,9 +36,11 @@ if __name__ == "__main__":
     run_output_dir = os.path.join(os.getcwd(), "nemo_experiments", "qwen35_vl_397b_32node")
     cfg.checkpoint.save = os.path.join(run_output_dir, "checkpoints")
     cfg.checkpoint.load = cfg.checkpoint.save
-    cfg.checkpoint.save_interval = 500
+    cfg.checkpoint.save_interval = 50
+    cfg.checkpoint.async_strategy = "mcore"
     cfg.logger.tensorboard_dir = os.path.join(run_output_dir, "tb_logs")
     cfg.logger.log_interval = 1
+    cfg.train.timing_log_level = 2
 
 
     ###### CONFIG TO TRY ######
