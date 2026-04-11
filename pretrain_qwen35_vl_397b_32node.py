@@ -51,6 +51,7 @@ if __name__ == "__main__":
     cfg.model.recompute_num_layers = None
     cfg.optimizer.use_precision_aware_optimizer = True
     cfg.ddp.grad_reduce_in_fp32 = False
+    cfg.mixed_precision.grad_reduce_in_fp32 = False
     cfg.model.moe_shared_expert_overlap = True
     cfg.model.moe_router_fusion = True
     cfg.model.tp_comm_overlap = True
