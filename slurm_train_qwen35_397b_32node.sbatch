@@ -3,7 +3,8 @@
 #SBATCH --nodes=32
 #SBATCH --ntasks-per-node=1
 #SBATCH --gres=gpu:8
-#SBATCH --exclusive
+#SBATCH --cpus-per-task=164
+#SBATCH --mem=1900G
 #SBATCH --exclude=worker-56
 #SBATCH --output=logs/qwen35_397b_%j.out
 #SBATCH --error=logs/qwen35_397b_%j.err
@@ -15,9 +16,9 @@
 # Usage: sbatch slurm_train_qwen35_397b_32node.sbatch
 #
 # Requirements: 32 nodes, 256 GPUs total (8 per node)
-# Model parallelism: TP=2, PP=4, EP=32, DP=32
-#   World = TP(2) × PP(4) × DP(32) = 256 GPUs
-#   EP=32 fully shards MoE experts across all 32 GPUs in each DP group
+# Model parallelism: TP=2, PP=2, EP=16, DP=64
+#   World = TP(2) × PP(2) × DP(64) = 256 GPUs
+#   EP=16 shards MoE experts across 16 GPUs in each DP group
 # ============================================================================
 
 # Print job information
@@ -100,7 +101,7 @@ export GPUS_PER_NODE=8
 echo "Master: $MASTER_ADDR:$MASTER_PORT"
 echo "World size: $WORLD_SIZE"
 echo "Network: $([ "$USE_INFINIBAND" -eq 1 ] && echo "InfiniBand" || echo "Ethernet")"
-echo "Model: Qwen3.5-397B-A17B (TP=2, PP=4, EP=32, DP=32 on 256 GPUs)"
+echo "Model: Qwen3.5-397B-A17B (TP=2, PP=2, EP=16, DP=64 on 256 GPUs)"
 echo "================================================================"
 
 # ============================================================================
