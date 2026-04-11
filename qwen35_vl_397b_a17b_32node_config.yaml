@@ -328,7 +328,7 @@ model:
   moe_apply_probs_on_input: false
   moe_aux_loss_coeff: 0.001
   moe_deepep_num_sms: 20
-  moe_enable_deepep: false
+  moe_enable_deepep: true
   moe_enable_routing_replay: false
   moe_expert_capacity_factor: null
   moe_ffn_hidden_size: 1024
@@ -361,8 +361,8 @@ model:
   moe_router_topk_scaling_factor: null
   moe_shared_expert_gate: true
   moe_shared_expert_intermediate_size: 1024
-  moe_shared_expert_overlap: true
-  moe_token_dispatcher_type: alltoall
+  moe_shared_expert_overlap: false
+  moe_token_dispatcher_type: flex
   moe_token_drop_policy: probs
   moe_token_dropping: false
   moe_z_loss_coeff: null
@@ -487,39 +487,35 @@ model:
   video_token_id: 248057
   virtual_pipeline_model_parallel_size: null
   vision_config:
-    _call_: true
-    _target_: transformers.models.qwen3_5_moe.configuration_qwen3_5_moe.Qwen3_5MoeVisionConfig.from_dict
-    config_dict:
-      _name_or_path: ''
-      architectures: null
-      chunk_size_feed_forward: 0
-      deepstack_visual_indexes: []
-      depth: 27
-      dtype: bfloat16
-      hidden_act: gelu_pytorch_tanh
-      hidden_size: 1152
-      id2label:
-        0: LABEL_0
-        1: LABEL_1
-      in_channels: 3
-      initializer_range: 0.02
-      intermediate_size: 4304
-      is_encoder_decoder: false
-      label2id:
-        LABEL_0: 0
-        LABEL_1: 1
-      model_type: qwen3_5_moe
-      num_heads: 16
-      num_position_embeddings: 2304
-      out_hidden_size: 4096
-      output_attentions: false
-      output_hidden_states: false
-      patch_size: 16
-      problem_type: null
-      return_dict: true
-      spatial_merge_size: 2
-      temporal_patch_size: 2
-      transformers_version: 5.3.0.dev0
+    _target_: transformers.models.qwen3_5_moe.configuration_qwen3_5_moe.Qwen3_5MoeVisionConfig
+    architectures: null
+    chunk_size_feed_forward: 0
+    depth: 27
+    dtype:
+      _call_: false
+      _target_: torch.bfloat16
+    hidden_act: gelu_pytorch_tanh
+    hidden_size: 1152
+    id2label:
+      0: LABEL_0
+      1: LABEL_1
+    in_channels: 3
+    initializer_range: 0.02
+    intermediate_size: 4304
+    is_encoder_decoder: false
+    label2id:
+      LABEL_0: 0
+      LABEL_1: 1
+    num_heads: 16
+    num_position_embeddings: 2304
+    out_hidden_size: 4096
+    output_hidden_states: false
+    patch_size: 16
+    problem_type: null
+    return_dict: true
+    spatial_merge_size: 2
+    temporal_patch_size: 2
+    transformers_version: null
   vision_dp_when_cp: false
   vision_end_token_id: 248054
   vision_start_token_id: 248053

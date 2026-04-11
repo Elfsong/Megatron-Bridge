@@ -54,7 +54,7 @@ if __name__ == "__main__":
     cfg.model.recompute_num_layers = None
     cfg.optimizer.use_precision_aware_optimizer = True
     cfg.ddp.grad_reduce_in_fp32 = False
-    cfg.model.moe_shared_expert_overlap = True
+    cfg.model.moe_shared_expert_overlap = False  # flex dispatcher doesn't support shared expert overlap
     cfg.model.moe_router_fusion = True
     cfg.model.tp_comm_overlap = True
     cfg.train.manual_gc_interval = 10
@@ -62,6 +62,12 @@ if __name__ == "__main__":
     cfg.model.fp8 = "hybrid"
     # cfg.model.virtual_pipeline_model_parallel_size = 3  # OOM with EP=16
     ###### END OF CONFIG TO TRY ######
+
+    ###### DeepEP Configuration ######
+    cfg.model.moe_token_dispatcher_type = "flex"
+    cfg.model.moe_enable_deepep = True
+    cfg.model.moe_flex_dispatcher_backend = "deepep"
+    ###### END OF DeepEP Configuration ######
 
 
 

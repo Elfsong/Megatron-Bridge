@@ -31,6 +31,16 @@ export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
 export CUDA_DEVICE_MAX_CONNECTIONS=1
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 
+# ============================================================================
+# NVSHMEM Configuration for DeepEP
+# ============================================================================
+export NVSHMEM_REMOTE_TRANSPORT=ibrc
+export NVSHMEM_HCA_LIST="mlx5_0:1,mlx5_1:1,mlx5_2:1,mlx5_3:1,mlx5_6:1,mlx5_7:1,mlx5_8:1,mlx5_9:1"
+export NVSHMEM_IB_GID_INDEX=3
+export NVSHMEM_BOOTSTRAP=UID
+export NVSHMEM_ENABLE_NIC_PE_MAPPING=1
+export NVSHMEM_SYMMETRIC_SIZE=4294967296  # 4GB
+
 export HF_DATASETS_CACHE="/megatron-bridge/cache_hf_dataset"
 
 # Pre-download dataset on node 0, other nodes wait, then all read from cache

@@ -106,7 +106,7 @@ echo "================================================================"
 # ============================================================================
 # Container Configuration
 # ============================================================================
-CONTAINER_IMAGE="/mnt/shared/images/megatron-bridge-transformers-5.3.0.dev0.sqsh"
+CONTAINER_IMAGE="/mnt/sftp/thuatnh/docker_images/deepep-pr574-no-megatron-ff087531.sqsh"
 CONTAINER_NAME="qwen35_397b_train_32n_${SLURM_JOB_ID}"
 MEGATRON_BRIDGE_PATH="${MEGATRON_BRIDGE_PATH:-$(pwd)}"
 CONTAINER_MOUNT_PATH="/megatron-bridge"
